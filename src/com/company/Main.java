@@ -32,10 +32,10 @@ public class Main {
         index++;
         StringBuilder sb2 = new StringBuilder();
         while (input[index] != 0) {
-            sb.append((char) input[index]);
+            sb2.append((char) input[index]);
             index++;
         }
-        String value = sb.toString();
+        String value = sb2.toString();
         String[] output = new String[2];
         output[0] = name;
         output[1] = value;
@@ -52,7 +52,7 @@ public class Main {
         String name = sb.toString();
         index++;
         Boolean value = Boolean.TRUE;
-        if ((int) input[index] == 0) {
+        if ((int) input[index] == 1) {
             value = true;
         } else {
             value = false;
@@ -65,7 +65,7 @@ public class Main {
         int index=0;
         for(int i = 0; i < stringinput.length(); i++){
             output[i] = (byte)stringinput.charAt(i);
-             index = i;
+            index = i;
         }
         index++;
         output[index] = 0;
@@ -77,12 +77,53 @@ public class Main {
         }
         return(output);
     }
-
+    public static byte[] stringToByte(String stringinputName, String stringinputvalue) {
+        byte[] output = new byte[2 + stringinputName.length() + stringinputvalue.length()];
+        int index = 0;
+        for (int i = 0; i < stringinputName.length(); i++) {
+            output[i] = (byte) stringinputName.charAt(i);
+            index = i;
+        }
+        index++;
+        output[index] = 0;
+        index++;
+        byte[] output2 = new byte[1 + stringinputvalue.length()];
+        int index2 = 0;
+        for (int i = 0; i < stringinputvalue.length(); i++) {
+            output2[i] = (byte) stringinputvalue.charAt(i);
+            index2 = i;
+        }
+        index2++;
+        output2[index2] = 0;
+        for(int i = 0; i<output2.length; i++){
+            output[index + i] = output2[i];
+        }
+        return (output);
+    }
+    public static byte[] BooleanToByte(String stringinput, Boolean Booleaninput) {
+        byte[] output = new byte[9 + stringinput.length()];
+        int index = 0;
+        for (int i = 0; i < stringinput.length(); i++) {
+            output[i] = (byte) stringinput.charAt(i);
+            index = i;
+        }
+        index++;
+        output[index] = 0;
+        index++;
+        if (Booleaninput.equals(true)) {
+            output[index] = 1;
+        } else {
+            output[index] = 0;
+        }
+        return (output);
+    }
     public static void main(String[] args) {
-        double test1 = 8;
-        String test2 = "test";
+        double test1 = 122.3434;
+        String test2 = "123";
         byte[] test = doubleToByte(test2, test1);
         System.out.print(byteToDouble(test).getKey() + ": " + byteToDouble(test).getValue());
 
     }
 }
+
+
